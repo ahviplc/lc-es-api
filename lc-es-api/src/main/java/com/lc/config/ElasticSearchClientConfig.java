@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  *
  *  ###AutoConfiguration xxxProperties
  * <p>
- * new HttpHost("localhost", 9201, "http")));
+ *  new HttpHost("localhost", 9201, "http")));
  */
 @Configuration
 public class ElasticSearchClientConfig {

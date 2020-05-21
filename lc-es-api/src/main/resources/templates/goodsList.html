@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://shop.bthhotels.com/Product/List?cId=104 -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>商品列表页-全部商品</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link th:href="@{/goodsListCDN/style.css}" rel="stylesheet">
+    <link th:href="@{/goodsListCDN/icon.css}" rel="stylesheet">
+    <!-- <link th:href="${'/goodsListCDN/icon.css'}" rel="stylesheet"> 这个也可$和''的组合-->
+    <link th:href="@{/goodsListCDN/base.css}" rel="stylesheet">
+    <link th:href="@{/goodsListCDN/reset.css}" rel="stylesheet">
+
+</head>
+<body>
+<div class="wrapper" id="app">
+
+    <!--header-->
+    <div class="header">
+        <!--top-->
+        <div class="top">
+            <div class="contain">
+                <div class="right client">
+                    <li>你好,尊敬的首旅如家客人</li>
+                    <li>
+                        <a href="#">登录</a>
+                    </li>
+                    <li>
+                        <a href="#">注册</a>
+                    </li>
+                </div>
+
+                <div class="logo_nav">
+
+                </div>
+                <div class="clear">&nbsp;</div>
+            </div>
+        </div>
+        <!--logo-->
+        <div class="logo">
+            <div class="contain">
+                <div class="left"><a href="#">
+                    <img th:src="@{/goodsListCDN/logo_new.png}"></a></div>
+                <div class="clear">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+
+    <!--nav-->
+    <div class="nav">
+        <div class="contain">
+            <div class="search_input right">
+                <input v-model="keywords" type="text" name="keyWords" class="keyWords" placeholder="搜索您想要的商品" value="">
+                <a href="javascript:;" @click.prevent="searchKeyWords"><em class="icon isearch" style="text-align: center;color: #ffffff;">搜索</em></a>
+                <!--  <button type="button" @click.prevent="searchKeyWord" id="searchbtn">搜索</button>-->
+            </div>
+            <a href="javascript:;" @click.prevent="parseKeyWords" style="color: white;">搜索框输入后,点我,parse格式化数据一下</a>
+            <div class="left">
+                <div class="hc_lnav jslist">
+                    <div class="drop">
+                        <ul>
+
+                            <li id="all_fl">
+                                <a href="#" class="red_bg">全部商品分类</a>
+                                <ul>
+
+                                    <li>
+                                        <a _fcksavedurl="#"
+                                           href="#">家居日用</a>
+                                        <ul>
+
+                                            <li>
+                                                <a href="#">健康食品</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#">个护化妆</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a _fcksavedurl="#" href="#">智能生活</a>
+                                    </li>
+
+                                    <li>
+                                        <a _fcksavedurl="#" href="#">数码家电</a>
+                                        <ul>
+                                            <li>
+                                                <a href="#">生活电器</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#">影音娱乐</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">无线设备</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <span class="menu">
+                <a href="#">兑换须知</a>
+
+            </span>
+            </div>
+            <div class="clear">&nbsp;</div>
+        </div>
+    </div>
+
+    <!--bread-->
+    <div class="bread">
+        <div class="contain">
+            <span class="fl">当前位置：</span><a href="#">首页</a>
+            <span class="fl">/</span><a href="#">积分商城</a>
+            <span class="fl">/</span><a href="#">家居日用</a>
+            <span class="fl">/</span><a href="#">健康食品</a></div>
+    </div>
+
+    <div class="white_bg">
+        <!--b_title-->
+        <div class="b_title">
+            <div class="contain">
+                <em class="tn_icon_id102"></em>
+                <h1 class="red">商品展示</h1>
+            </div>
+        </div>
+        <!--selection-->
+
+        <!--result-->
+        <div class="result">
+            <div class="contain" id="result">
+            </div>
+        </div>
+        <!--product-->
+        <div class="product">
+            <div class="title">
+                <div class="contain gray_bg">
+                    <div class="padding">
+                        <div class="right">共计<i class="red">{{resultsSize}}</i>件商品</div>
+                        <div class="left">
+                            <h1 class="red">全部商品分类</h1>
+                            <div class="tab"><a href="#" class="active">综&nbsp;&nbsp;合</a>
+                                <a href="#">销&nbsp;&nbsp;量</a>
+                                <a href="#">评&nbsp;&nbsp;价</a>
+                                <a href="#">提示区: {{msg}}</a>
+                            </div>
+                        </div>
+                        <div class="clear">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--container-->
+    <div class="container">
+        <div class="product">
+            <div class="contain">
+                <div class="content">
+
+                    <div class="block" onclick="@" v-for="goods in results">
+                        <div class="img">
+                            <a href="#" target="_blank">
+                                <!--<img th:src="@{/goodsListCDN/201708301123062299.jpg}" style="z-index: 6; display: block;"> </a>-->
+                                <img :src="goods.img" style="z-index: 6; display: block;"> </a>
+                        </div>
+                        <dl>
+                            <dt>
+                                <!-- <dt><a href="#" target="_blank">{{goods.title}}</a>-->
+                                <a href="#" target="_blank" v-html="goods.title"></a>
+                            </dt>
+                            <!--<dd><text><h2 class="red">6225</h2><span class="red">积分</span></text></dd>-->
+                            <dd>
+                                <a href="javascript:;" onclick="@"><em class="icon ilike"></em><span class="red">{{goods.price}}</span></a>
+                            </dd>
+                        </dl>
+                        <a href="javascript:;" class="addcart"><em class="icon iaddcart"></em>加入购物车</a>
+                        <input type="hidden" class="ProductId" value="18074">
+                        <input type="hidden" class="ProductCurrentDepot" value="49">
+                    </div>
+
+                    <div class="clear">&nbsp;</div>
+
+                </div>
+                <div class="page">
+                    <div><a disabled="disabled">首页</a>
+                        <a disabled="disabled">上一页</a>
+                        <a class="active" href="javascript:;">1</a>
+                        <a disabled="disabled">下一页</a>
+                        <a disabled="disabled">末页</a></div>
+                </div>
+            </div>
+        </div>
+    </div><!--cart_success-->
+
+    <!--footer begin -->
+    <div class="footer">
+        <div class="main_w1200 fix">
+            <div class="footerL">
+                <dl>
+                    <dt>酒店预订</dt>
+                    <dd><a href="#">地图预订</a></dd>
+                </dl>
+                <dl>
+                    <dt>家宾会</dt>
+                    <dd><a href="#">会员手册</a></dd>
+                </dl>
+                <dl>
+                    <dt>加盟合作</dt>
+                    <dd><a href="#">加盟和颐酒店</a></dd>
+                </dl>
+                <dl>
+                    <dt>首旅如家酒店集团</dt>
+                    <dd><a href="#">联系我们</a></dd>
+                    <dd><a href="#">招贤纳士</a></dd>
+                </dl>
+            </div>
+            <div class="footerR">
+                <ul>
+                    <li>
+                        <div class="footerR_l">
+                            <img th:src="@{/goodsListCDN/APPQRCode.png}" width="135">
+                            <p>下载APP尊享超值礼包</p>
+                        </div>
+                        <div class="footerR_r">
+                            <img th:src="@{/goodsListCDN/Public_signal.png}" width="135">
+                            <p>关注微信公众号领取好礼</p>
+                        </div>
+                    </li>
+                    <li class="footerR_aboutus">
+                        <p>酒店预订电话</p>
+                        <p><span>400 820 ####  或  #### 3333</span></p>
+                        <p style="font-size:14px; color:#535353; margin-top:-1px;">服务时间为7点-凌晨1点</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer_tip">
+        <div class="main_w1200">
+            <div class="footer_tipL">
+                版权所有 © 2020 Homeinns Co.,Ltd All Rights Reserved.
+                <br>LC（上海）有限公司 沪ICP备110120119号-688
+            </div>
+            <div class="footer_tipR">
+                <dl>
+                    <dt class="gs_icon"><i></i></dt>
+                    <dd class="gs_name">上海工商</dd>
+                </dl>
+                <dl>
+                    <dt class="wj_icon"><i></i></dt>
+                    <dd>上海网警<br>网络110</dd>
+                </dl>
+                <dl>
+                    <dt class="wl_icon"><i></i></dt>
+                    <dd>网络社会<br>征信网</dd>
+                </dl>
+                <dl>
+                    <dt class="icp_icon"><i></i></dt>
+                    <dd>沪ICP备<br>120110119号-8</dd>
+                </dl>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!--footer end-->
+</div>
+<!--前端使用Vue,实现前后端分离-->
+<script th:src="@{/js/vue.min.js}"></script>
+<!--http请求框架axios-->
+<script th:src="@{/js/axios.min.js}"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            keywords: '', //搜索的关键字
+            results: [], //搜索的结果
+            pageNo: 1,
+            pageSize: 50,
+            resultsSize: 0,//搜索的结果数量,
+            msg:'' //消息
+        },
+        methods: {
+            searchKeyWords() {
+                var keywords = this.keywords;
+                console.log(keywords)
+                //对接后端接口
+                axios.get('search/' + keywords + '/' + this.pageNo.toLocaleString() + '/' + this.pageSize.toString()).then(response => {
+                    console.log(response);
+                    this.results = response.data;//绑定数据
+                    this.resultsSize = this.results.length;
+                })
+            },
+            parseKeyWords() {
+                var keywords = this.keywords;
+                var that = this;
+                    console.log(keywords)
+                //对接后端接口
+                axios.get('parse/' + keywords).then(response => {
+                    console.log(response);
+                    if (response.data == true) {
+                        that.msg = '格式化数据成功'
+                    } else {
+                        that.msg = '格式化数据失败'
+                    }
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>

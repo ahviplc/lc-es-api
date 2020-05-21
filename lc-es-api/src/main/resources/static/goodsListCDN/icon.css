@@ -1,0 +1,229 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+.icon,.recommend .red_bg,.selection .active .icheck i {
+	/*background-image: url(../goodsListCDN/icons.png);*/
+}
+
+.icon.il2{
+	background-image: url(../images/l2.png);
+}
+a:hover .icon.il2{
+	background-image: url(../images/l2_active.png);
+	background-color:#651d49;
+}
+.icon.il3{
+	background-image: url(../images/l3.png);
+}
+a:hover .icon.il3{
+	background-image: url(../images/l3_active.png);
+	background-color:#928068;
+}
+.icon.il4{
+	background-image: url(../images/l4.png);
+}
+a:hover .icon.il4{
+	background-image: url(../images/l4_active.png);
+	background-color:#ec7133;
+}
+.icon.il5{
+	background-image: url(../images/l5.png);
+}
+a:hover .icon.il5{
+	background-image: url(../images/l5_active.png);
+	background-color:#3c7a3d;
+}
+.icon.il6{
+	background-image: url(../images/l6.png);
+}
+a:hover .icon.il6{
+	background-image: url(../images/l6_active.png);
+	background-color:#a52921;
+}
+.icon.itravel{
+	background-position: -546px -58px;
+	width:36px;
+	height:46px;
+}
+.icon.ichecked ,.selection .active .icheck i{
+	background-position: -321px -98px;
+	width:10px;
+	height:10px;
+}
+.icon.iaddcart,.icon.idel,.icon.icart{
+	width:26px;
+	height:26px;
+}
+.icon.iaddcart {
+	background-position: -222px -72px;
+
+}
+.icon.icart{
+	 background-position: -250px -72px;
+}
+.icon.ibcart,.icon.ibunhappy{
+	width:68px;
+	height:68px;
+}
+.icon.ibcart{
+	background-position: -165px -2px;
+}
+.icon.ibunhappy{
+	 background-position: -235px -2px;
+}
+.icon.ilike,.icon.ishare{
+	width:16px;
+	height:16px;
+	line-height:16px;
+	vertical-align:middle;
+}
+.icon.ishare{
+	background-position: -564px -106px;
+}
+.icon.ilike {
+	 background-position: -648px -19px;
+}
+.icon.ifavorite{
+	background-position: -599px -97px;
+}
+.icon.itop{
+	background-position: -627px -86px;
+}
+.icon.ibtop{
+	background-position: -536px -104px;
+	width:20px;
+	height:20px;
+}
+.icon.iquestion{
+	background-position: -299px -100px;
+	width:20px;
+	height:20px;
+}
+
+
+a:hover .icon.ilike,a.active .icon.ilike  {
+	background-position: -648px -35px;
+}
+
+.icon.imore_choice {
+	background-position: -440px -117px;
+	width:8px;
+	height:20px;
+	position:relative;
+	top: 5px;
+}
+a:hover .icon.imore_choice,a.active .icon.imore_choice {
+	background-position: -321px -109px;
+}
+.icon.iadd {
+	background-position: -196px -74px;
+	background-color:#ca101a;
+	-moz-border-radius:50%;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	width:22px;
+	height:22px;
+	line-height:22px;
+}
+.icon.isearch {
+	background-position: -620px -58px;
+	background-color:#ca101a;
+	width:26px;
+	height:26px;
+	padding:0px 7px;
+}
+a:hover .icon.idel {
+	background-position: -306px -72px;
+	background-color:#ca101a;
+}
+.icon.idel {
+	background-position: -278px -72px;
+}
+.iprev_arrow,.inext_arrow{
+	width:17px;
+	height:100%;
+	position:absolute;
+	top:0px;
+	background-position: -129px -2px;
+}
+.iprev_arrow{
+	background-position: -129px -54px;
+	left:8px;
+}
+.iprev_arrow:hover{
+	background-position: -129px -2px;
+}
+.inext_arrow{
+	background-position: -149px -54px;
+	right:8px;
+}
+.inext_arrow:hover{
+	background-position: -149px -2px;
+}
+.icon.imoney,.icon.icard,.icon.iscore{
+	width:24px;
+	height:20px;
+	margin-right:5px;
+}
+.icon.imoney {
+	background-position: -249px -100px;
+}
+.icon.icard {
+	background-position: -224px -100px;
+}
+.icon.iscore {
+	background-position: -274px -100px;
+}
+.icon.iright,.mystore .succeed,.register .succeed{
+	 background-position: -149px -106px;
+}
+.mystore .succeed,.register .succeed{
+	width:20px;
+	height:20px;
+	background-repeat:no-repeat;
+	background-position:center center;
+	vertical-align:top;
+	display:inline-block;
+}
+.register .succeed{
+	vertical-align:middle;
+}
+.icon.istar {
+	background-position: -367px -2px;
+}
+.icon.iuser,.icon.ipw{
+	width:28px;
+	height:24px;
+	position:absolute;
+	right:10px;
+	top:4px;
+}
+.icon.iuser {
+	background-position: -196px -100px;
+}
+.icon.ipw {
+	 background-position: -168px -101px;
+}
+.strengthA b, .strengthB b, .strengthC b {
+	background-image: url(../images/icon/icons.png);
+	background-repeat:no-repeat;
+}
+
+.icon.icheckbox {
+	background-color:#ca101a;
+	width:18px;
+	height:18px;
+	-moz-border-radius:0.2em;
+	-webkit-border-radius:0.2em;
+	border-radius:0.2em;
+	background-image:none;
+
+}
+.icon.icheckbox input[type=checkbox]{
+	opacity:0.1;
+}
+.icon.icheckbox.checked{
+	background-image: url(../images/icon/icons.png);
+	background-repeat:no-repeat;
+	background-position: -129px -106px;
+}
