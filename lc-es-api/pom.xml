@@ -20,7 +20,47 @@
         <elasticsearch.version>7.6.2</elasticsearch.version>
     </properties>
 
-    <dependencies><!--导入了-->
+    <dependencies>
+        <!--导入了-->
+        <!-- mybatis-plus -->
+        <!-- mybatis-plus 是自己开发，并非官方的！现在最新版 3.3.1 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+        <!-- oracle数据库驱动 -->
+        <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 这个废弃了 不可down-->
+       <!-- <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>10.2.0.4.0</version>
+        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.oracle.ojdbc/ojdbc8 这个可用 并且JDK版本支持 with JDK8, JDK9, and JDK11-->
+        <dependency>
+            <groupId>com.oracle.ojdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>19.3.0.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!--代码生成器所需 rai18n - Oracle 12cR1: orai18n.jar. Classes for NLS support.-->
+        <!-- https://mvnrepository.com/artifact/cn.easyproject/orai18n -->
+        <dependency>
+            <groupId>cn.easyproject</groupId>
+            <artifactId>orai18n</artifactId>
+            <version>12.1.0.2.0</version>
+        </dependency>
+        <!--代码生成器 默认 模板引擎 依赖 Velocity 其他Freemarker、Beetl，用户可以选择自己熟悉的模板引擎 具体尽在 【https://mp.baomidou.com/guide/generator.html#添加依赖】-->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <!-- mysql数据库驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
         <dependency>
             <groupId>org.jsoup</groupId>

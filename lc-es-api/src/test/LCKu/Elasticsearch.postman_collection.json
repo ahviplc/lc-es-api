@@ -1,0 +1,821 @@
+{
+	"info": {
+		"_postman_id": "c74c2509-35d4-42ee-8875-c59854025abd",
+		"name": "Elasticsearch",
+		"description": "Elasticsearch 相关",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://192.168.0.16:9200/lc_db",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mappings\":{\r\n        \"student\":{\r\n            \"properties\":{\r\n                \"id\":{\r\n                    \"type\":\"long\",\r\n                    \"fields\":{\r\n                        \"keyword\":{\r\n                            \"type\":\"keyword\",\r\n                            \"ignore_above\":256\r\n                        }\r\n                    }\r\n                },\r\n                \"stu_code\":{\r\n                    \"type\":\"text\",\r\n                    \"fields\":{\r\n                        \"keyword\":{\r\n                            \"type\":\"keyword\",\r\n                            \"ignore_above\":256\r\n                        }\r\n                    }\r\n                },\r\n                \"stu_name\":{\r\n                    \"type\":\"text\",\r\n                    \"fields\":{\r\n                        \"keyword\":{\r\n                            \"type\":\"keyword\",\r\n                            \"ignore_above\":256\r\n                        }\r\n                    }\r\n                },\r\n                \"stu_age\":{\r\n                    \"type\":\"integer\",\r\n                    \"fields\":{\r\n                        \"keyword\":{\r\n                            \"type\":\"keyword\",\r\n                            \"ignore_above\":256\r\n                        }\r\n                    }\r\n                },\r\n                \"stu_date\":{\r\n                    \"type\":\"long\",\r\n                    \"fields\":{\r\n                        \"keyword\":{\r\n                            \"type\":\"keyword\",\r\n                            \"ignore_above\":256\r\n                        }\r\n                    }\r\n                },\r\n                \"stu_bool\":{\r\n                    \"type\":\"boolean\",\r\n                    \"fields\":{\r\n                        \"keyword\":{\r\n                            \"type\":\"keyword\",\r\n                            \"ignore_above\":256\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db"
+					]
+				},
+				"description": "http://192.168.0.16:9200/lc_db\n创建索引\n\n【\n知识总结:\nhits内部的参数值就行了。\n\ntook：是查询花费的时间，毫秒单位。\n\ntime_out：标识查询是否超时。\n\n_shards：描述了查询分片的信息，查询了多少个分片、成功的分片数量、失败的分片数量等。\n\nhits：搜索的结果，total是全部的满足的文档数目，hits是返回的实际数目（默认是10）。\n\n_score是文档的分数信息，与排名相关度有关，参考各大搜索引擎的搜索结果，就容易理解。\n\ntotal:1;(代表当前ES里总数只有一条数据，不管你发送任何请求，ES都会把总数返回)\n\n_index：我们指定查询的索引（类似数据库的某个库）。\n\n_type：我们指定查询的文档（类似数据库的某张表）\n\n_id：查询指定的id。\n\n_source：查询返回数据。\n\n】"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db/student/3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"3\",\r\n    \"stu_code\":\"1A0003\",\r\n    \"stu_name\":\"李四\",\r\n    \"stu_age\":\"18\",\r\n    \"stu_date\":\"1528887157717\",\r\n    \"stu_bool\":\"true\"\r\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db/student/3",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db",
+						"student",
+						"3"
+					]
+				},
+				"description": "192.168.0.16:9200/lc_db/student/3\n新增操作"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db/_search?pretty",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db/_search?pretty",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				},
+				"description": "192.168.0.16:9200/lc_db/_search?pretty\n查看我们新增的数据"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db/_mapping?pretty",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db/_mapping?pretty",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db",
+						"_mapping"
+					],
+					"query": [
+						{
+							"key": "pretty",
+							"value": null
+						}
+					]
+				},
+				"description": "192.168.0.16:9200/lc_db/_mapping?pretty 查看一下mapping是否已经在ES中存在"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/_analyze",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"analyzer\":\"ik_smart\",\n\t\"text\":\"我爱你,LC.梦想,梦大想\"\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/_analyze",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"_analyze"
+					]
+				},
+				"description": "{\n\t\"analyzer\":\"ik_smart\",\n\t\"text\":\"我爱你\"\n}\n\nik分词器"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/_analyze",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"analyzer\":\"ik_max_word\",\n\t\"text\":\"我爱你中国,你好LC!\"\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/_analyze",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"_analyze"
+					]
+				},
+				"description": "{\n\t\"analyzer\":\"ik_max_word\",\n\t\"text\":\"我爱你中国,你好LC!\"\n}\n\nik分词器"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3/dog/2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dog_id\":\"2\",\r\n    \"dog_name\":\"二哈说java\",\r\n    \"dog_age\":\"2\"\r\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3/dog/2",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3",
+						"dog",
+						"2"
+					]
+				},
+				"description": "{\r\n    \"dog_id\":\"2\",\r\n    \"dog_name\":\"二哈\",\r\n    \"dog_age\":\"1\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db2/student/4",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"4\",\r\n    \"stu_code\":\"1A0004\",\r\n    \"stu_name\":\"王芳4\",\r\n    \"stu_age\":\"18\",\r\n    \"stu_date\":\"1528887157717\",\r\n    \"stu_bool\":\"true\"\r\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_2/student/4",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_2",
+						"student",
+						"4"
+					]
+				},
+				"description": "{\r\n    \"id\":\"4\",\r\n    \"stu_code\":\"1A0004\",\r\n    \"stu_name\":\"王芳\",\r\n    \"stu_age\":\"18\",\r\n    \"stu_date\":\"1528887157717\",\r\n    \"stu_bool\":\"true\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3"
+					]
+				},
+				"description": "192.168.0.16:9200/lc_db_3"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/_cat",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/_cat",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"_cat"
+					]
+				},
+				"description": "=^.^=\n/_cat/allocation\n/_cat/shards\n/_cat/shards/{index}\n/_cat/master\n/_cat/nodes\n/_cat/tasks\n/_cat/indices\n/_cat/indices/{index}\n/_cat/segments\n/_cat/segments/{index}\n/_cat/count\n/_cat/count/{index}\n/_cat/recovery\n/_cat/recovery/{index}\n/_cat/health\n/_cat/pending_tasks\n/_cat/aliases\n/_cat/aliases/{alias}\n/_cat/thread_pool\n/_cat/thread_pool/{thread_pools}\n/_cat/plugins\n/_cat/fielddata\n/_cat/fielddata/{fields}\n/_cat/nodeattrs\n/_cat/repositories\n/_cat/snapshots/{repository}\n/_cat/templates\n"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/_cat/health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/_cat/health",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"health"
+					]
+				},
+				"description": "192.168.0.16:9200/_cat/health"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/_cat/indices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/_cat/indices",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"indices"
+					]
+				},
+				"description": "192.168.0.16:9200/_cat/indices"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_2/student/4/_update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"doc\":{\r\n    \t \"stu_name\":\"王芳888\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_2/student/4/_update",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_2",
+						"student",
+						"4",
+						"_update"
+					]
+				},
+				"description": "{\r\n    \"doc\":{\r\n    \t \"stu_name\":\"王芳888\"\r\n    }\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.0.16:9200/lc_db_4",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://192.168.0.16:9200/lc_db_4",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_4"
+					]
+				},
+				"description": "http://192.168.0.16:9200/lc_db_4\n删除索引"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3/dog/2",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3/dog/2",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3",
+						"dog",
+						"2"
+					]
+				},
+				"description": "192.168.0.16:9200/lc_db_3/dog/2\n删除文档记录"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3/dog/_search?q=dog_name:二哈说java",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3/dog/_search?q=dog_name:二哈说java",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3",
+						"dog",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "dog_name:二哈说java"
+						}
+					]
+				},
+				"description": "192.168.0.16:9200/lc_db_3/dog/_search?q=dog_name:二哈说java"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3/dog/_search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match\": {\n            \"dog_name\": \"二哈说java\"\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3/dog/_search",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3",
+						"dog",
+						"_search"
+					]
+				},
+				"description": "{\n\t\"query\":{\n\t\t\"match\":{\n\t\t\t\"dog_name\":\"二哈说java\"\n\t\t}\n\t}\n}\n\n高级搜索"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3/dog/_search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match\": {\n            \"dog_name\": \"二哈说java\"\n        }\n    },\n    \"_source\":[\"dog_name\",\"dog_age\"]\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3/dog/_search",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3",
+						"dog",
+						"_search"
+					]
+				},
+				"description": "{\n    \"query\": {\n        \"match\": {\n            \"dog_name\": \"二哈说java\"\n        }\n    },\n    \"_source\":[\"dog_name\",\"dog_age\"]\n}\n\n定义输出字段"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3/dog/_search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match\": {\n            \"dog_name\": \"二哈说java\"\n        }\n    },\n    \"_source\": [\n        \"dog_name\",\n        \"dog_age\"\n    ],\n    \"sort\": [\n        {\n            \"dog_age\": {\n                \"order\": \"desc\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3/dog/_search",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3",
+						"dog",
+						"_search"
+					]
+				},
+				"description": "{\n    \"query\": {\n        \"match\": {\n            \"dog_name\": \"二哈说java\"\n        }\n    },\n    \"_source\": [\n        \"dog_name\",\n        \"dog_age\"\n    ],\n    \"sort\": [\n        {\n            \"dog_age\": {\n                \"order\": \"desc\"\n            }\n        }\n    ]\n}\n\n过滤 排序"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3/dog/_search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match\": {\n            \"dog_name\": \"二哈说java\"\n        }\n    },\n    \"_source\": [\n        \"dog_name\",\n        \"dog_age\"\n    ],\n    \"from\": 0,\n    \"size\": 1\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3/dog/_search",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3",
+						"dog",
+						"_search"
+					]
+				},
+				"description": "{\n    \"query\": {\n        \"match\": {\n            \"dog_name\": \"二哈说java\"\n        }\n    },\n    \"_source\": [\n        \"dog_name\",\n        \"dog_age\"\n    ],\n    \"from\": 0,\n    \"size\": 1\n}\n\n页码 数量"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3/dog/_search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"bool\": {\n            \"must\": [\n                {\n                    \"match\": {\n                        \"dog_name\": \"二哈说java\"\n                    }\n                },\n                {\n                    \"match\": {\n                        \"dog_age\": \"2\"\n                    }\n                }\n            ]\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3/dog/_search",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3",
+						"dog",
+						"_search"
+					]
+				},
+				"description": "{\n    \"query\": {\n        \"bool\": {\n            \"must\": [\n                {\n                    \"match\": {\n                        \"dog_name\": \"二哈说java\"\n                    }\n                },\n                {\n                    \"match\": {\n                        \"dog_age\": \"2\"\n                    }\n                }\n            ]\n        }\n    }\n}\n\n布尔值查询 多重条件查询\nmust是and\nmust not 必须不\nshould是or"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3/dog/_search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"bool\": {\n            \"must\": [\n                {\n                    \"match\": {\n                        \"dog_name\": \"二哈说java\"\n                    }\n                }\n            ],\n            \"filter\": {\n                \"range\": {\n                    \"dog_age\": {\n                        \"gt\": \"3\"\n                    }\n                }\n            }\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3/dog/_search",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3",
+						"dog",
+						"_search"
+					]
+				},
+				"description": "过滤\ngt 大于\ngte 大于等于\nit 小于\nite 小于等于"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3/dog/_search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match\": {\n            \"dog_name\": \"二哈说java 天\"\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3/dog/_search",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3",
+						"dog",
+						"_search"
+					]
+				},
+				"description": "匹配多个条件\n多个条件使用空格隔开"
+			},
+			"response": []
+		},
+		{
+			"name": "192.168.0.16:9200/lc_db_3/dog/_search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match\": {\n            \"dog_name\": \"二哈说java 天\"\n        }\n    },\n    \"highlight\": {\n        \"pre_tags\": \"<p class='key' style='color:red'>\",\n        \"post_tags\": \"</p>\",\n        \"fields\": {\n            \"dog_name\": {}\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "192.168.0.16:9200/lc_db_3/dog/_search",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"16"
+					],
+					"port": "9200",
+					"path": [
+						"lc_db_3",
+						"dog",
+						"_search"
+					]
+				},
+				"description": "term 精确查询 是直接通过倒排索引指定的此条进程精确查找的\n\n关于分词：\n\nterm 直接查询精确的\nmatch 会使用分词器解析（先分析文档,然后在通过分析的文档进行查询）\n\n两个类型 text keyword\n\n还有\n\n多个值匹配精确查询\n\n高亮显示\n\n这些数据库也可以做 只是效率比较低：\n匹配\n按照条件匹配\n精确匹配\n区间范围匹配\n匹配字段过滤\n多条件查询\n高亮查询"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,5 @@
+Maven Repository: com.oracle.ojdbc » ojdbc8 » 19.3.0.0
+https://mvnrepository.com/artifact/com.oracle.ojdbc/ojdbc8/19.3.0.0
+
+Maven Repository: com.oracle.ojdbc » ojdbc8
+https://mvnrepository.com/artifact/com.oracle.ojdbc/ojdbc8
