@@ -26,7 +26,7 @@ public class AutoGeneratorMain {
         // 配置策略
         // 1、全局配置
         GlobalConfig gc = new GlobalConfig();
-        String projectPath = System.getProperty("user.dir");
+        String projectPath = System.getProperty("user.dir"); // D:\DevelopSoftKu\ideaIU-2019.3.win\#CodeKu\lc-es-api
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("LC");
         gc.setOpen(false);
@@ -34,7 +34,7 @@ public class AutoGeneratorMain {
         gc.setServiceName("%sService"); // 去Service的I前缀
         gc.setIdType(IdType.ID_WORKER);
         gc.setDateType(DateType.ONLY_DATE);
-        gc.setSwagger2(true);
+        gc.setSwagger2(false);//设置为false吧 目前没有其相关包
         mpg.setGlobalConfig(gc);
         //2、设置数据源
         DataSourceConfig dsc = new DataSourceConfig();

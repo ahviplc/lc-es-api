@@ -43,14 +43,15 @@ public class MybatisPlusBasicTests {
     // 测试插入
     @Test
     public void testInsert() {
-        MBPUser user = new MBPUser();
-        user.setName("LC说Java");
-        user.setAge(3);
-        user.setEmail("110@qq.com");
-
-        int result = mbpUserMapper.insert(user); // 帮我们自动生成id
-        System.out.println(result); // 受影响的行数
-        System.out.println(user); // 发现，id会自动回填
+        for (int i = 1; i <= 100; i++) { // 一次生成100个
+            MBPUser user = new MBPUser();
+            user.setName("LC说Java_"+i);
+            user.setAge(3);
+            user.setEmail("110@qq.com");
+            int result = mbpUserMapper.insert(user); // 帮我们自动生成id
+            System.out.println(result); // 受影响的行数
+            System.out.println(user); // 发现，id会自动回填
+        }
     }
 
     // 测试更新
@@ -60,7 +61,7 @@ public class MybatisPlusBasicTests {
         // 通过条件自动拼接动态sql
         user.setId(1263667861894451201L);
         user.setName("关注公众号：ahviplc");
-        user.setAge(20);
+        user.setAge(21);
         // 注意：updateById 但是参数是一个 对象！
         int i = mbpUserMapper.updateById(user);
         System.out.println(i);
@@ -70,7 +71,7 @@ public class MybatisPlusBasicTests {
     @Test
     public void testOptimisticLocker() {
         // 1、查询用户信息
-        MBPUser user = mbpUserMapper.selectById(1L);
+        MBPUser user = mbpUserMapper.selectById(1263667861894451201L);
         // 2、修改用户信息
         user.setName("LC");
         user.setEmail("120@qq.com");
