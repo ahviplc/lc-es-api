@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- *
+ * SysConfig
  * </p>
  *
  * @author LC
