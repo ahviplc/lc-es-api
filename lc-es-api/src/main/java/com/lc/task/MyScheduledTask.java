@@ -15,13 +15,13 @@ public class MyScheduledTask {
         System.out.println(DateUtil.currentStr() + " " + Thread.currentThread().getName() + " 定时任务类:com.lc.task.MyScheduledTask task() ===============执行中===============");
     }
 
-    // fixedDelay = 1000 * 10 固定间隔任务 10s
+    // fixedDelay = 1000 * 10 固定间隔任务 10s 上一次任务执行结束后10秒再执行
     @Scheduled(fixedDelay = 1000 * 10 * 6 * 30) // 这里设置30分钟
     public void task2() {
         System.out.println(DateUtil.currentStr() + " " + Thread.currentThread().getName() + " 定时任务类:com.lc.task.MyScheduledTask task2() ===============执行中===============");
     }
 
-    // fixedRate = 1000 * 10 固定频率任务 10s
+    // fixedRate = 1000 * 10 固定频率任务 10s 上一次开始执行时间点10秒后再执行
     @Scheduled(fixedRate = 1000 * 10 * 6 * 30) // 这里设置30分钟
     public void task3() {
         System.out.println(DateUtil.currentStr() + " " + Thread.currentThread().getName() + " 定时任务类:com.lc.task.MyScheduledTask task3() ===============执行中===============");
