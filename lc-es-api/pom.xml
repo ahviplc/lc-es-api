@@ -23,6 +23,12 @@
     </properties>
 
     <dependencies>
+        <!--Hutool是一个小而全的Java工具类库-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.4.2</version>
+        </dependency>
         <!--导入了-->
         <!--excel工具 EasyExcel依赖-->
         <dependency>
@@ -45,11 +51,11 @@
         </dependency>
         <!-- oracle数据库驱动 -->
         <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 这个废弃了 不可down-->
-       <!-- <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>10.2.0.4.0</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>com.oracle</groupId>
+             <artifactId>ojdbc14</artifactId>
+             <version>10.2.0.4.0</version>
+         </dependency>-->
         <!-- https://mvnrepository.com/artifact/com.oracle.ojdbc/ojdbc8 这个可用 并且JDK版本支持 with JDK8, JDK9, and JDK11-->
         <dependency>
             <groupId>com.oracle.ojdbc</groupId>
