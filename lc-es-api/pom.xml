@@ -22,7 +22,21 @@
         <skipTests>true</skipTests>
     </properties>
 
+    <!--添加repositories 使用fastgit 速度更快 可解决Could not transfer artifact问题-->
+    <repositories>
+        <repository>
+            <id>ahviplc-maven-repo</id>
+            <url>https://raw.fastgit.org/ahviplc/maven-repository/master/repository</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+        <!--添加自己的JustToolc工具类库-->
+        <dependency>
+            <groupId>com.lc</groupId>
+            <artifactId>JustToolc</artifactId>
+            <version>0.2.0</version>
+        </dependency>
         <!--Hutool是一个小而全的Java工具类库-->
         <dependency>
             <groupId>cn.hutool</groupId>

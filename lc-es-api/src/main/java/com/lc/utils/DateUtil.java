@@ -1,6 +1,8 @@
 package com.lc.utils;
 
 
+import com.lc.lang.UConsole;
+
 import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -471,5 +473,6 @@ public final class DateUtil {
     public static void main(String args[]) {
         System.out.println(convert(new Date(), DEFAULT_TIMESTAMP));//yyyyMMddHHmmss-20181010112832
         System.out.println(convert("20181010112832", DEFAULT_TIMESTAMP));
+        UConsole.log("test-{}", "JusrToolc-0.2.0");
     }
 }
