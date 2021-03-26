@@ -24,5 +24,13 @@
 alibaba/easyexcel: 快速、简单避免OOM的java处理Excel工具  
 > https://github.com/alibaba/easyexcel
 
+### 其他
+> 引入JustToolc,可能会出现下面的问题
+```markdown
+Could not transfer artifact com.lc:JustToolc:pom:0.2.0 from/to ahviplc-maven-repo 
+(https://raw.fastgit.org/ahviplc/maven-repository/master/repository): Transfer failed for 
+https://raw.fastgit.org/ahviplc/maven-repository/master/repository/com/lc/JustToolc/0.2.0/JustToolc-0.2.0.pom
+```
+
 **By LC** 2020-5-27 10:15:21
 
