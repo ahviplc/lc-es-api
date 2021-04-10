@@ -110,6 +110,7 @@ https://www.cnblogs.com/jpfss/p/10945324.html
 > mvn clean package docker:build -X
 
 创建 lc-es-api-idea 镜像 成功
+
 ``
 [INFO] Building image lc-es-api-idea
 Step 1/3 : FROM java:8
@@ -149,6 +150,32 @@ lc-es-api-idea      latest              439b3a456c75        50 seconds ago      
 
 -X 显示的更加详细log输出
 > mvn clean package docker:build -X
+
+``
+[INFO] Building image lc-es-api-idea
+Step 1/5 : FROM java:8
+
+ ---> d23bdf5b1b1b
+Step 2/5 : MAINTAINER LC ahlc@sina.cn
+
+ ---> Using cache
+ ---> 65614eaf6296
+Step 3/5 : VOLUME /tmp
+
+ ---> Using cache
+ ---> c450f09a5f74
+Step 4/5 : ADD target/app.jar /app.jar
+
+ ---> 93415fd511c8
+Step 5/5 : ENTRYPOINT ["java","-jar","/app.jar"]
+
+ ---> Running in f8c19510c7ba
+Removing intermediate container f8c19510c7ba
+ ---> d825604dd5bd
+ProgressMessage{id=null, status=null, stream=null, error=null, progress=null, progressDetail=null}
+Successfully built d825604dd5bd
+Successfully tagged lc-es-api-idea:latest
+``
 
 创建 lc-es-api-idea 镜像 成功
 
