@@ -79,8 +79,29 @@ https://github.com/spotify/docker-maven-plugin
 docker-maven-plugin详细使用方法_0xac001d09-CSDN博客_docker-maven-plugin
 https://blog.csdn.net/weixin_44424668/article/details/104062822
 
-Maven 插件之 docker-maven-plugin 的使用 - 星朝 - 博客园
+666666-根据这个文章的第二种使用方式 完美使用 完美构建-下面有具体介绍-不错-很详细-看这个文章-第一种将构建信息指定到pom.xml中和写的其第二种使用方式-使用已存在的Dockerfile构建-Maven 插件之 docker-maven-plugin 的使用 - 星朝 - 博客园
 https://www.cnblogs.com/jpfss/p/10945324.html
+
+将其 docker-maven-plugin 成功使用 参考的文章 如下:
+666666 -有观点-这个实践下来-确实需要的-加这个jar进maven的pom.xml- maven-docker整合时候，使用mvn docker:build发生javax.activation.DataSource没找到的异常_blueboz的博客-CSDN博客
+https://blog.csdn.net/blueboz/article/details/105270641
+
+666666 -说的很对-我这边就是因为-设置成了其他jdk8镜像【<baseImage>java:8</baseImage>】 - 而我的docker里就是只有java:8设置成java:8这个镜像【<baseImage>java:8</baseImage>】就可以了 - pull access denied for jdk1.8, repository does not exist or may require 'docker login'解决_tlimited的博客-CSDN博客
+https://blog.csdn.net/u014204541/article/details/102628433
+
+windows docker desktop 设置2375端口远程访问_ZouChengli的博客-CSDN博客
+https://blog.csdn.net/ZouChengli/article/details/106616879
+
+Maven的六类属性，${project.basedir}，${project.build.directory}：项目构件输出目录，默认为 target/ 
+https://my.oschina.net/u/4292771/blog/3305782
+```
+
+### Maven插件之 docker-maven-plugin 的两种使用
+不错-很详细-看这个文章-第一种将构建信息指定到pom.xml中和写的其第二种使用方式-使用已存在的Dockerfile构建-Maven 插件之 docker-maven-plugin 的使用 - 星朝 - 博客园
+https://www.cnblogs.com/jpfss/p/10945324.html
+```markdown
+
+第一种将构建信息指定到pom.xml中 在这里使用有点问题.
 
 清空 打包 docker构建镜像 maven命令
 > mvn clean package docker:build
@@ -116,22 +137,27 @@ lc-es-api-idea      latest              439b3a456c75        50 seconds ago      
 
 > docker run --name lc-es-api-idea-run -d -i -p 8088:8088 lc-es-api-idea:latest 
 
-访问我:
-localhost:8088
+> 不能run起来-虽然已经可以自动构建docker成功 但是其run生成的容器 无法运行 我认为是因为这是在win docker中的原因,回来在linux docker中试试.
 ``
 
-将其 docker-maven-plugin 成功使用 参考的文章 如下:
-666666 -有观点-这个实践下来-确实需要的-加这个jar进maven的pom.xml- maven-docker整合时候，使用mvn docker:build发生javax.activation.DataSource没找到的异常_blueboz的博客-CSDN博客
-https://blog.csdn.net/blueboz/article/details/105270641
+第二种使用方式-使用已存在的Dockerfile构建
+> 这里可直接完美使用
 
-666666 -说的很对-我这边就是因为-设置成了其他jdk8镜像【<baseImage>java:8</baseImage>】 - 而我的docker里就是只有java:8设置成java:8这个镜像【<baseImage>java:8</baseImage>】就可以了 - pull access denied for jdk1.8, repository does not exist or may require 'docker login'解决_tlimited的博客-CSDN博客
-https://blog.csdn.net/u014204541/article/details/102628433
+同样
+清空 打包 docker构建镜像 maven命令
+> mvn clean package docker:build
 
-windows docker desktop 设置2375端口远程访问_ZouChengli的博客-CSDN博客
-https://blog.csdn.net/ZouChengli/article/details/106616879
+-X 显示的更加详细log输出
+> mvn clean package docker:build -X
 
-Maven的六类属性，${project.basedir}，${project.build.directory}：项目构件输出目录，默认为 target/ 
-https://my.oschina.net/u/4292771/blog/3305782
+创建 lc-es-api-idea 镜像 成功
+
+``
+根据镜像image执行run 生成对应容器 -d 后台运行 并允许 -p 映射端口-本地8088到容器8088
+> docker run -di -p 8088:8088 --name lc-es-api-idea-run lc-es-api-idea
+``
+访问我:
+localhost:8088
 ```
 
 ### Dockerfile
@@ -153,6 +179,7 @@ COPY target/lc-es-api-0.0.1-SNAPSHOT.jar lc-es-api-0.0.1-SNAPSHOT.jar
 
 # bash方式执行，使lc-es-api-0.0.1-SNAPSHOT.jar可访问
 # RUN新建立一层，在其上执行这些命令，执行结束后， commit 这一层的修改，构成新的镜像。
+# 其touch命令的作用是修改这个文件的访问时间和修改时间为当前时间，而不会修改文件的内容
 RUN bash -c "touch /lc-es-api-0.0.1-SNAPSHOT.jar"
 
 # 声明运行时容器提供服务端口，这只是一个声明，在运行时并不会因为这个声明应用就会开启这个端口的服务
@@ -168,7 +195,7 @@ Docker Hub
 > https://registry.hub.docker.com/repository/docker/ahviplc/lc-es-api
 
 ahviplc/lc-es-api Tags
-https://registry.hub.docker.com/r/ahviplc/lc-es-api/tags?page=1&ordering=last_updated
+> https://registry.hub.docker.com/r/ahviplc/lc-es-api/tags?page=1&ordering=last_updated
 
 请拉取尝鲜吧
 > docker pull ahviplc/lc-es-api:latest
@@ -178,13 +205,16 @@ https://registry.hub.docker.com/r/ahviplc/lc-es-api/tags?page=1&ordering=last_up
 FROM java:8
 
 # 维护者信息
-MAINTAINER LC
+MAINTAINER LC ahlc@sina.cn
 
 # 这里的 /tmp 目录就会在运行时自动挂载为匿名卷，任何向 /tmp 中写入的信息都不会记录进容器存储层
 VOLUME /tmp
 
 # 复制上下文目录下的target/lc-es-api-0.0.1-SNAPSHOT.jar 到容器里 起别名为 app.jar
-ADD target/lc-es-api-0.0.1-SNAPSHOT.jar /app.jar
+# ADD target/lc-es-api-0.0.1-SNAPSHOT.jar /app.jar
+# 由于pom.xml配置了【<finalName>app</finalName>】 所以会自动打包成 app.jar
+# 故要改成下面的写法 复制上下文目录下的target/app.jar 到容器里 起别名也叫为 app.jar
+ADD target/app.jar /app.jar
 
 # 指定容器启动程序及参数   <ENTRYPOINT> "<CMD>"
 ENTRYPOINT ["java","-jar","/app.jar"]
@@ -412,6 +442,83 @@ docker pull ahviplc/lc-es-api:latest
 Done.
 
 ps. 待续
+```
+
+### Maven插件之 docker-maven-plugin 的两种使用 - 给出配置的具体说明
+
+> 第一种将构建信息指定到pom.xml中和写的其第二种使用方式-使用已存在的Dockerfile构建
+
+第一种
+```xml
+<!-- docker-maven-plugin 插件 第一种使用方法 将构建信息指定到pom.xml中-->
+<!-- todo 解决 -> 虽然已经可以自动构建docker成功 但是其run生成的容器 无法运行 我认为是因为这是在win docker中的原因,回来在linux docker中试试-->
+<!-- 不需要的时候 可以将下面的plugin所有代码注释掉-->
+<!-- docker-maven-plugin 插件 自动部署到 docker 镜像-->
+<plugin>
+    <groupId>com.spotify</groupId>
+    <artifactId>docker-maven-plugin</artifactId>
+    <!-- 使用 <version>1.0.0</version> 或者 1.2.2 版本会报错 Failed to load Google application default credentials | java.io.IOException: The Application Default Credentials are not available 但是也会构建lc-es-api-idea镜像成功-->
+    <!-- 没有问题的是 0.4.14 版本 【此版本为 1.0.0版本的上一版本】-->
+    <version>0.4.14</version>
+    <configuration>
+        <!-- 注 Imagenameー定要是符合正则 [a-z0-9-.]的，否则构建不会成功-->
+        <!-- https://github.com/spotify/docker-maven-plugin-->
+        <imageName>lc-es-api-idea</imageName>
+        <baseImage>java:8</baseImage>
+        <!-- 相当于启动容器后，会自动执行 java -jar /app.jar-->
+        <entryPoint>["java", "‐jar", "/${project.build.finalName}.jar"]</entryPoint>
+        <resources>
+            <resource>
+                <targetPath>/</targetPath>
+                <directory>${project.build.directory}</directory>
+                <include>${project.build.finalName}.jar</include>
+            </resource>
+        </resources>
+        <dockerHost>http://192.168.1.3:2375</dockerHost>
+    </configuration>
+    <!-- just for 插件 docker-maven-plugin -->
+    <!-- 注意 无论docker-maven-plugin什么版本 需要下面jar 否则会报错 【java.lang.ClassNotFoundException: javax.activation.DataSource】-->
+    <!-- 虽然报错 但是也会构建 lc-es-api-idea 镜像成功-->
+    <dependencies>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+    </dependencies>
+</plugin>
+```
+第二种
+```xml
+<!-- docker-maven-plugin 插件 第二种使用方法 使用已存在的 Dockerfile 构建-->
+<plugin>
+    <groupId>com.spotify</groupId>
+    <artifactId>docker-maven-plugin</artifactId>
+    <version>0.4.14</version>
+    <configuration>
+        <imageName>lc-es-api-idea</imageName>
+        <!-- 指定 Dockerfile 路径 ${basedir}/docker 我这里是 ${basedir} 我将 Docokerfile 文件放在了项目根目录 -->
+        <dockerDirectory>${basedir}</dockerDirectory>
+        <!-- 这里是复制 jar 包到 docker 容器指定目录配置，也可以写到 Docokerfile 中 -->
+        <resources>
+            <resource>
+                <targetPath>/</targetPath>
+                <directory>${project.build.directory}</directory>
+                <include>${project.build.finalName}.jar</include>
+            </resource>
+        </resources>
+    </configuration>
+    <!-- just for 插件 docker-maven-plugin -->
+    <!-- 注意 无论docker-maven-plugin什么版本 需要下面jar 否则会报错 【java.lang.ClassNotFoundException: javax.activation.DataSource】-->
+    <!-- 虽然报错 但是也会构建 lc-es-api-idea 镜像成功-->
+    <dependencies>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+    </dependencies>
+</plugin>
 ```
 
 ### 访问我
