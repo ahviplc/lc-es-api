@@ -69,6 +69,69 @@ https://rancher.com/
 
 Rancher文档 | K8S文档 | Rancher | Rancher文档
 http://docs.rancher.cn/
+
+【一点教程】Docker+SpringCloud微服务部署_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili
+https://www.bilibili.com/video/BV1s5411j7zq?p=25
+
+GitHub - spotify/docker-maven-plugin: INACTIVE: A maven plugin for Docker
+https://github.com/spotify/docker-maven-plugin
+
+docker-maven-plugin详细使用方法_0xac001d09-CSDN博客_docker-maven-plugin
+https://blog.csdn.net/weixin_44424668/article/details/104062822
+
+Maven 插件之 docker-maven-plugin 的使用 - 星朝 - 博客园
+https://www.cnblogs.com/jpfss/p/10945324.html
+
+清空 打包 docker构建镜像 maven命令
+> mvn clean package docker:build
+
+-X 显示的更加详细log输出
+> mvn clean package docker:build -X
+
+创建 lc-es-api-idea 镜像 成功
+``
+[INFO] Building image lc-es-api-idea
+Step 1/3 : FROM java:8
+
+ ---> d23bdf5b1b1b
+Step 2/3 : ADD /app.jar //
+
+ ---> f05e3e827759
+Step 3/3 : ENTRYPOINT ["java", "‐jar", "/app.jar"]
+
+ ---> Running in 2d55719451e8
+Removing intermediate container 2d55719451e8
+ ---> 439b3a456c75
+ProgressMessage{id=null, status=null, stream=null, error=null, progress=null, progressDetail=null}
+Successfully built 439b3a456c75
+Successfully tagged lc-es-api-idea:latest
+
+查看docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+lc-es-api-idea      latest              439b3a456c75        50 seconds ago      733MB
+
+以此镜像 【lc-es-api-idea】 运行成一个容器 试试
+根据镜像image执行run 生成对应容器 -d 后台运行 并允许 -p 映射端口-本地8088到容器8088
+> docker run -di -p 8088:8088 --name lc-es-api-idea-run lc-es-api-idea
+
+> docker run --name lc-es-api-idea-run -d -i -p 8088:8088 lc-es-api-idea:latest 
+
+访问我:
+localhost:8088
+``
+
+将其 docker-maven-plugin 成功使用 参考的文章 如下:
+666666 -有观点-这个实践下来-确实需要的-加这个jar进maven的pom.xml- maven-docker整合时候，使用mvn docker:build发生javax.activation.DataSource没找到的异常_blueboz的博客-CSDN博客
+https://blog.csdn.net/blueboz/article/details/105270641
+
+666666 -说的很对-我这边就是因为-设置成了其他jdk8镜像【<baseImage>java:8</baseImage>】 - 而我的docker里就是只有java:8设置成java:8这个镜像【<baseImage>java:8</baseImage>】就可以了 - pull access denied for jdk1.8, repository does not exist or may require 'docker login'解决_tlimited的博客-CSDN博客
+https://blog.csdn.net/u014204541/article/details/102628433
+
+windows docker desktop 设置2375端口远程访问_ZouChengli的博客-CSDN博客
+https://blog.csdn.net/ZouChengli/article/details/106616879
+
+Maven的六类属性，${project.basedir}，${project.build.directory}：项目构件输出目录，默认为 target/ 
+https://my.oschina.net/u/4292771/blog/3305782
 ```
 
 ### Dockerfile
@@ -137,6 +200,9 @@ maven clean package
 3. 根据 Dockerfile 生成镜像 镜像名称为: lc-es-api
 docker build -t lc-es-api .
 
+删除镜像 - 先删除其对应启动的容器 再删除此镜像
+docker rmi 50d42d1b15ff
+
 4. 根据镜像image执行run 生成对应容器 -d 后台运行 并允许 -p 映射端口-本地8088到容器8088
 docker run -d -p 8088:8088 --name lc-es-api-run lc-es-api
 
@@ -145,6 +211,9 @@ docker run -di -p 8088:8088 --name lc-es-api-run lc-es-api
 
 登录守护式容器
 docker exec -it lc-es-api-run /bin/bash
+
+删除容器 - 需要先将其停止
+docker rm 04e3451233de
 
 5. 进入 lc-es-api-run 容器内部 控制台 就是一个linux结构的小型系统 可使用linux命令进行系列操作
 备注：不使用容器id 使用Names 名称 也是可以的
