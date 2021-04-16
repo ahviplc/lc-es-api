@@ -94,6 +94,9 @@ https://blog.csdn.net/ZouChengli/article/details/106616879
 
 Maven的六类属性，${project.basedir}，${project.build.directory}：项目构件输出目录，默认为 target/ 
 https://my.oschina.net/u/4292771/blog/3305782
+
+一加壹博客最Top-一起共创1+1>2的力量！~LC
+http://oneplusone.vip/index.html
 ```
 
 ### Maven插件之 docker-maven-plugin 的两种使用
@@ -444,6 +447,11 @@ C:\Users\theDiyPCOfLC\.docker
 将镜像打了一个标签，相当于重命名一样，让名称尽可能规范
 docker tag lc-es-api ahviplc/lc-es-api:latest
 
+删除此tag(和删除一个镜像是同一个命令):
+docker rmi ahviplc/lc-es-api:latest
+删除此tag 对应的镜像
+docker rmi lc-es-api
+
 查看所有镜像
 ``
 docker images
@@ -465,6 +473,26 @@ docker push ahviplc/lc-es-api:latest
 
 请拉取尝鲜吧
 docker pull ahviplc/lc-es-api:latest
+
+以此镜像 执行容器
+docker run --name lc-es-api-run -d -i -p 8088:8088 docker.io/ahviplc/lc-es-api:latest
+
+访问我.
+公网的哦.
+http://106.14.212.65:8088/
+
+http://106.14.212.65:8088/userlist
+
+http://oneplusone.vip:8088/
+
+http://oneplusone.vip:8088/userlist
+
+其es的服务没有启动-故下面链接功能不全.
+http://oneplusone.vip:8088/goodslist
+
+此版本
+docker pull ahviplc/lc-es-api:latest
+可正常访问使用的.
 
 Done.
 
