@@ -69,7 +69,7 @@
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
-            <version>1.5.3</version>
+            <version>1.6.0</version>
         </dependency>
         <!-- mybatis-plus -->
         <!-- mybatis-plus 是自己开发，并非官方的！现在最新版 3.3.1 -->
